@@ -28,8 +28,7 @@ RUN ZULU_ARCH=zulu11.1+23-ea-jdk11-linux_x64.tar.gz && \
     mv /usr/local/${ZULU_DIR} ${INSTALL_DIR} && \
 	cd ${BIN_DIR}; find ${INSTALL_DIR}/bin -type f -perm -a=x -exec ln -s {} . \; && \
 	mkdir -p ${MAN_DIR} && \
-	cd ${MAN_DIR}; find ${INSTALL_DIR}/man/man1 -type f -name "*.1" -exec ln -s {} . \; && \
-	java -version 
+	cd ${MAN_DIR}; find ${INSTALL_DIR}/man/man1 -type f -name "*.1" -exec ln -s {} . \; 
 
 ENV JAVA_HOME /usr/local/java
 ENV PATH $PATH:$JAVA_HOME/bin
