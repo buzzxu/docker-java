@@ -33,6 +33,8 @@ RUN ZULU_ARCH=zulu11.1+23-ea-jdk11-linux_x64.tar.gz && \
 	cd ${MAN_DIR} && find ${INSTALL_DIR}/${ZULU_DIR}/man/man1 -type f -name "*.1" -exec ln -s {} . \; && \
     ln -svT ${INSTALL_DIR}/${ZULU_DIR} /java-home && \
 	java -version 
+RUN apk del ca-certificates && \ 
+    rm -rf /var/cache/apk
 
 ENV JAVA_HOME /java-home
 ENV PATH $PATH:$JAVA_HOME/bin
