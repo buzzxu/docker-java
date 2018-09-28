@@ -10,6 +10,7 @@ RUN apt-get -qq update && \
     locale-gen zh_CN.UTF-8 && \
     apt-get --purge remove -y locales && \
     rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/* && \
     apt-get clean 
     
 

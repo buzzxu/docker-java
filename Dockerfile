@@ -9,7 +9,8 @@ RUN apk update && apk upgrade && \
     update-ca-certificates && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shanghai" > /etc/timezone && \
     apk del tzdata && \
-    rm -rf /var/cache/apk 
+    rm -rf /var/cache/apk/* && \
+    rm -rf /tmp/*
 
 RUN wget "https://www.archlinux.org/packages/core/x86_64/zlib/download" -O /tmp/libz.tar.xz \
     && mkdir -p /tmp/libz \
