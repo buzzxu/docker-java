@@ -1,14 +1,13 @@
-FROM frolvlad/alpine-glibc:latest
+FROM frolvlad/alpine-glibc
 
 MAINTAINER buzzxu <downloadxu@163.com>
 
 # 设置相应的时区
 RUN apk update && apk upgrade && \
-    apk add --no-cache ca-certificates tzdata  wget && \
+    apk add --no-cache ca-certificates tzdata  wget vim && \
     update-ca-certificates && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shanghai" > /etc/timezone && \
-    apk del tzdata 
-RUN apk add vim
+    apk del tzdata
 
 RUN wget "https://www.archlinux.org/packages/core/x86_64/zlib/download" -O /tmp/libz.tar.xz \
     && mkdir -p /tmp/libz \
