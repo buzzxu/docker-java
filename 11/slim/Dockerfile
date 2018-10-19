@@ -3,9 +3,8 @@ FROM openjdk:11.0.1-jre-slim
 MAINTAINER buzzxu <downloadxu@163.com>
 
 # 设置相应的时区
-RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime 
-
-RUN apt-get -qq update && \
+RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    apt-get -qq update && \
     apt-get install -y locales vim && \
     locale-gen zh_CN.UTF-8 && \
     apt-get --purge remove -y locales && \
