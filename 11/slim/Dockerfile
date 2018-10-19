@@ -1,4 +1,4 @@
-FROM openjdk:11-jre-slim
+FROM openjdk:11.0.1-jre-slim
 
 MAINTAINER buzzxu <downloadxu@163.com>
 
