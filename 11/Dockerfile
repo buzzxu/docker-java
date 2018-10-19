@@ -5,12 +5,10 @@ MAINTAINER buzzxu <downloadxu@163.com>
 ENV LANG C.UTF-8
 # 设置相应的时区
 RUN apk update && apk upgrade && \
-    apk add --no-cache ca-certificates tzdata  wget vim && \
+    apk add --no-cache --virtual .build-deps ca-certificates tzdata wget && \
+    apk add --no-cache vim && \
     update-ca-certificates && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shanghai" > /etc/timezone && \
-    apk del tzdata && \
-    rm -rf /var/cache/apk/* && \
-    rm -rf /tmp/* && \
     #安装glibc
     wget "https://www.archlinux.org/packages/core/x86_64/zlib/download" -O /tmp/libz.tar.xz \
     && mkdir -p /tmp/libz \
@@ -34,7 +32,9 @@ RUN apk update && apk upgrade && \
 	cd ${MAN_DIR} && find ${INSTALL_DIR}/${ZULU_DIR}/man/man1 -type f -name "*.1" -exec ln -s {} . \; && \
     ln -svT ${INSTALL_DIR}/${ZULU_DIR} /java-home && \
 	java -version && \ 
-    apk del ca-certificates 
+    apk del .build-deps && \
+    rm -rf /var/cache/apk/* && \
+    rm -rf /tmp/* && \
 
 ENV JAVA_HOME /java-home
 ENV PATH $PATH:$JAVA_HOME/bin
