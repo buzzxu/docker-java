@@ -19,7 +19,7 @@ RUN wget "https://www.archlinux.org/packages/core/x86_64/zlib/download" -O /tmp/
     && /usr/glibc-compat/sbin/ldconfig \
     && rm -rf /tmp/libz /tmp/libz.tar.xz
 
-RUN ZULU_ARCH=zulu11.1+23-ea-jdk11-linux_x64.tar.gz && \
+RUN ZULU_ARCH=zulu11.2.3-jdk11.0.1-linux_x64.tar.gz && \
 	INSTALL_DIR=/usr/local/jvm && \
 	BIN_DIR=/usr/bin && \
 	MAN_DIR=/usr/share/man/man1 && \
