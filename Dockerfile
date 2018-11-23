@@ -39,4 +39,4 @@ RUN apk del ca-certificates
 
 ENV JAVA_HOME /java-home
 ENV PATH $PATH:$JAVA_HOME/bin
-ENV JAVA_VERSION 11-ea+22
+ENV JAVA_VERSION 11.0.1
