@@ -5,19 +5,21 @@ MAINTAINER buzzxu <downloadxu@163.com>
 ENV LANG C.UTF-8
 # 设置相应的时区
 RUN apk update && apk upgrade && \
-    apk add --no-cache --virtual .build-deps ca-certificates tzdata wget && \
-    apk add --no-cache vim && \
+    apk add --no-cache ca-certificates tzdata  wget vim && \
     update-ca-certificates && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shanghai" > /etc/timezone && \
-    #安装glibc
-    wget "https://www.archlinux.org/packages/core/x86_64/zlib/download" -O /tmp/libz.tar.xz \
+    apk del tzdata && \
+    rm -rf /var/cache/apk/* && \
+    rm -rf /tmp/*
+
+RUN wget "https://www.archlinux.org/packages/core/x86_64/zlib/download" -O /tmp/libz.tar.xz \
     && mkdir -p /tmp/libz \
     && tar -xf /tmp/libz.tar.xz -C /tmp/libz \
     && cp /tmp/libz/usr/lib/libz.so.1.2.11 /usr/glibc-compat/lib \
     && /usr/glibc-compat/sbin/ldconfig \
-    && rm -rf /tmp/libz /tmp/libz.tar.xz && \
-    #安装zulu-open-jdk
-    ZULU_ARCH=zulu11.2.3-jdk11.0.1-linux_musl_x64.tar.gz && \
+    && rm -rf /tmp/libz /tmp/libz.tar.xz
+
+RUN ZULU_ARCH=zulu11.2.3-jdk11.0.1-linux_x64.tar.gz && \
 	INSTALL_DIR=/usr/local/jvm && \
 	BIN_DIR=/usr/bin && \
 	MAN_DIR=/usr/share/man/man1 && \
@@ -31,11 +33,10 @@ RUN apk update && apk upgrade && \
 	mkdir -p ${MAN_DIR} && \
 	cd ${MAN_DIR} && find ${INSTALL_DIR}/${ZULU_DIR}/man/man1 -type f -name "*.1" -exec ln -s {} . \; && \
     ln -svT ${INSTALL_DIR}/${ZULU_DIR} /java-home && \
-	java -version && \ 
-    apk del .build-deps && \
-    rm -rf /var/cache/apk/* && \
-    rm -rf /tmp/* && \
-    echo 'export TZ=Asia/Shanghai >> /etc/profile' \ 
+	java -version \
+    echo 'export TZ=Asia/Shanghai >> /etc/profile'
+    
+RUN apk del ca-certificates 
 
 ENV JAVA_HOME /java-home
 ENV PATH $PATH:$JAVA_HOME/bin
