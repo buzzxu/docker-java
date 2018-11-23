@@ -17,7 +17,7 @@ RUN apk update && apk upgrade && \
     && /usr/glibc-compat/sbin/ldconfig \
     && rm -rf /tmp/libz /tmp/libz.tar.xz && \
     #安装zulu-open-jdk
-    ZULU_ARCH=zulu11.1+23-ea-jdk11-linux_x64.tar.gz && \
+    ZULU_ARCH=zulu11.2.3-jdk11.0.1-linux_musl_x64.tar.gz && \
 	INSTALL_DIR=/usr/local/jvm && \
 	BIN_DIR=/usr/bin && \
 	MAN_DIR=/usr/share/man/man1 && \
@@ -35,7 +35,8 @@ RUN apk update && apk upgrade && \
     apk del .build-deps && \
     rm -rf /var/cache/apk/* && \
     rm -rf /tmp/* && \
+    echo 'export TZ=Asia/Shanghai >> /etc/profile' \ 
 
 ENV JAVA_HOME /java-home
 ENV PATH $PATH:$JAVA_HOME/bin
-ENV JAVA_VERSION 11-ea+22
+ENV JAVA_VERSION 11.0.1

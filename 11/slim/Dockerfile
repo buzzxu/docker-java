@@ -10,7 +10,8 @@ RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     apt-get --purge remove -y locales && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/* && \
-    apt-get clean 
+    apt-get clean \
+    echo 'export TZ=Asia/Shanghai >> /etc/profile' \ 
     
 
 # Default to UTF-8 file.encoding
