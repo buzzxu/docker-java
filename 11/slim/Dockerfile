@@ -3,15 +3,17 @@ FROM openjdk:11.0.1-jre-slim
 MAINTAINER buzzxu <downloadxu@163.com>
 
 # 设置相应的时区
-RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+RUN rm /etc/localtime && \
+    ln -sv /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \ 
+    echo "Asia/Shanghai" > /etc/timezone && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -qq install -y locales vim && \
     locale-gen zh_CN.UTF-8 && \
     DEBIAN_FRONTEND=noninteractive apt-get --purge remove -y locales && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/* && \
-    apt-get clean \
-    echo 'export TZ=Asia/Shanghai >> /etc/profile' \ 
+    apt-get clean && \
+    echo 'export TZ=Asia/Shanghai' >> /etc/profile \ 
     
 
 # Default to UTF-8 file.encoding

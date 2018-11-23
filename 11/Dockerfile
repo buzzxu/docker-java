@@ -2,12 +2,12 @@ FROM frolvlad/alpine-glibc
 
 MAINTAINER buzzxu <downloadxu@163.com>
 
-ENV LANG C.UTF-8
 # 设置相应的时区
 RUN apk update && apk upgrade && \
     apk add --no-cache ca-certificates tzdata  wget vim && \
     update-ca-certificates && \
-    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shanghai" > /etc/timezone && \
+    ln -sv /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \ 
+    echo "Asia/Shanghai" > /etc/timezone && \
     apk del tzdata && \
     rm -rf /var/cache/apk/* && \
     rm -rf /tmp/*
@@ -34,10 +34,11 @@ RUN ZULU_ARCH=zulu11.2.3-jdk11.0.1-linux_x64.tar.gz && \
 	cd ${MAN_DIR} && find ${INSTALL_DIR}/${ZULU_DIR}/man/man1 -type f -name "*.1" -exec ln -s {} . \; && \
     ln -svT ${INSTALL_DIR}/${ZULU_DIR} /java-home && \
 	java -version \
-    echo 'export TZ=Asia/Shanghai >> /etc/profile'
+    echo 'export TZ=Asia/Shanghai' >> /etc/profile
     
 RUN apk del ca-certificates 
 
+ENV LANG zh_CN.UTF-8
 ENV JAVA_HOME /java-home
 ENV PATH $PATH:$JAVA_HOME/bin
 ENV JAVA_VERSION 11.0.1
