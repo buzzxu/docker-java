@@ -16,5 +16,6 @@ RUN rm /etc/localtime && \
     echo 'export TZ=Asia/Shanghai' >> /etc/profile \ 
     
 
+ENV TZ='Asia/Shanghai'
 # Default to UTF-8 file.encoding
 ENV LANG zh_CN.UTF-8
