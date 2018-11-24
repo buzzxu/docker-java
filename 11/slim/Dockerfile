@@ -12,7 +12,7 @@ RUN rm /etc/localtime && \
     DEBIAN_FRONTEND=noninteractive apt-get --purge remove -y locales && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/* && \
-    apt-get clean && \
+    apt-get clean 
     
 
 ENV TZ Asia/Shanghai
