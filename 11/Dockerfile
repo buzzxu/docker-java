@@ -31,10 +31,9 @@ RUN ZULU_ARCH=zulu11.2.3-jdk11.0.1-linux_x64.tar.gz && \
 	mkdir -p ${MAN_DIR} && \
 	cd ${MAN_DIR} && find ${INSTALL_DIR}/${ZULU_DIR}/man/man1 -type f -name "*.1" -exec ln -s {} . \; && \
     ln -svT ${INSTALL_DIR}/${ZULU_DIR} /java-home && \
-    echo 'export TZ=Asia/Shanghai' >> /etc/profile && \
 	java -version \
 
-ENV TZ='Asia/Shanghai'
+ENV TZ Asia/Shanghai
 ENV LANG zh_CN.UTF-8
 ENV JAVA_HOME /java-home
 ENV PATH $PATH:$JAVA_HOME/bin
