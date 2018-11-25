@@ -1,6 +1,6 @@
 FROM openjdk:11.0.1-jre-slim
 
-MAINTAINER buzzxu <downloadxu@163.com>
+LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
 # 设置相应的时区
 RUN rm /etc/localtime && \
@@ -17,4 +17,4 @@ RUN rm /etc/localtime && \
 
 ENV TZ Asia/Shanghai
 # Default to UTF-8 file.encoding
-ENV LANG zh_CN.UTF-8
+ENV LANG C.UTF-8

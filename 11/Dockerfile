@@ -1,6 +1,6 @@
 FROM frolvlad/alpine-glibc
 
-MAINTAINER buzzxu <downloadxu@163.com>
+LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
 # 设置相应的时区
 RUN apk update && apk upgrade && \
@@ -34,7 +34,7 @@ RUN ZULU_ARCH=zulu11.2.3-jdk11.0.1-linux_x64.tar.gz && \
 	java -version 
 
 ENV TZ Asia/Shanghai
-ENV LANG zh_CN.UTF-8
+ENV LANG C.UTF-8
 ENV JAVA_HOME /java-home
 ENV PATH $PATH:$JAVA_HOME/bin
 ENV JAVA_VERSION 11.0.1
