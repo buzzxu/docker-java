@@ -4,7 +4,7 @@ LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
 # 设置相应的时区
 RUN apk update && apk upgrade && \
-    apk add --no-cache -U tzdata wget vim && \
+    apk add --no-cache -U tzdata wget && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \ 
     echo "Asia/Shanghai" > /etc/timezone && \
     rm -rf /var/cache/apk/* && \
