@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-glibc
+FROM frolvlad/alpine-glibc:alpine-3.8_glibc-2.28
 
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
@@ -36,6 +36,5 @@ RUN ZULU_ARCH=zulu11.2.3-jdk11.0.1-linux_x64.tar.gz && \
 ENV TZ Asia/Shanghai
 ENV LANG C.UTF-8
 ENV JAVA_VERSION 11.0.1
-ENV JAVA_BUILD_VERSION 11.0.1+13-3
 ENV JAVA_HOME /java-home
 ENV PATH $PATH:$JAVA_HOME/bin
