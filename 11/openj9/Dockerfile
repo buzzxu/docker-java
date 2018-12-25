@@ -11,5 +11,7 @@ RUN apk update && apk upgrade && \
     rm -rf /var/cache/apk/* && \
     rm -rf /tmp/*
 
+ENV JAVA_VERSION 11.0.1
+ENV JAVA_BUILD_VERSION 11.0.1+13
 ENV TZ Asia/Shanghai
 ENV LANG C.UTF-8

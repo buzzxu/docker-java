@@ -17,6 +17,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/* 
     
+ENV JAVA_VERSION 11.0.1
+ENV JAVA_BUILD_VERSION 11.0.1+13
 ENV TZ Asia/Shanghai
-# Default to UTF-8 file.encoding
 ENV LANG C.UTF-8
