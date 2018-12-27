@@ -4,7 +4,7 @@ LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
 RUN ["jlink", "--compress=2", \
      "--module-path", "/opt/java/openjdk/jmods", \
-     "--add-modules", "java.base,java.desktop,java.instrument,java.logging,java.management,java.naming,java.rmi,java.security.jgss,java.sql,java.xml,jdk.unsupported", \  
+     "--add-modules", "java.base,java.desktop,java.instrument,java.logging,java.management,java.net.http,java.naming,java.rmi,java.security.jgss,java.sql,java.xml,jdk.unsupported", \  
      "--bind-services",\ 
      "--output", "/jre"]  
 
