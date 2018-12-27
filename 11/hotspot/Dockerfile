@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11-openj9:alpine  AS jlink
+FROM adoptopenjdk/openjdk11:alpine AS jlink
 
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
@@ -11,7 +11,7 @@ RUN ["jlink", "--compress=2", \
 FROM frolvlad/alpine-glibc:alpine-3.8_glibc-2.28     
 
 RUN apk update && apk upgrade && \
-    apk add --no-cache -U ca-certificates binutils tzdata wget && \
+    apk add --no-cache -U binutils tzdata wget && \
     rm /etc/localtime && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \ 
     echo "Asia/Shanghai" > /etc/timezone && \
@@ -30,6 +30,7 @@ RUN apk update && apk upgrade && \
     rm -rf /tmp/* 
 
 COPY --from=jlink /jre /opt/jre/ 
+
 
 ENV TZ Asia/Shanghai
 ENV LANG C.UTF-8
