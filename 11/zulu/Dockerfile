@@ -9,7 +9,7 @@ RUN jdir=$(dirname $(dirname $(find /usr/lib/jvm -name javac))) && \
 FROM alpine:latest
 
 RUN apk update && apk upgrade && \
-    apk add --no-cache -U tzdata  && \
+    apk add --no-cache -U tzdata fontconfig ttf-dejavu && \
     rm /etc/localtime && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \ 
     echo "Asia/Shanghai" > /etc/timezone && \

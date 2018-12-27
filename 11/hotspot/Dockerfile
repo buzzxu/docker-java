@@ -12,7 +12,7 @@ RUN ["jlink", "--compress=2","--strip-debug", \
 FROM frolvlad/alpine-glibc:alpine-3.8_glibc-2.28     
 
 RUN apk update && apk upgrade && \
-    apk add --no-cache -U binutils tzdata wget && \
+    apk add --no-cache -U binutils tzdata wget fontconfig ttf-dejavu && \
     rm /etc/localtime && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \ 
     echo "Asia/Shanghai" > /etc/timezone && \

@@ -15,7 +15,7 @@ RUN rm -rf /var/lib/apt/lists/* && \
     apt-get clean && \
     apt-get update -qq && \ 
     apt-get upgrade -y && \
-    apt-get install -qq -y --no-install-recommends openssl && \
+    apt-get install -qq -y --no-install-recommends openssl libfontconfig1 && \
     rm /etc/localtime && \
     ln -sv /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \ 
     echo "Asia/Shanghai" > /etc/timezone && \
