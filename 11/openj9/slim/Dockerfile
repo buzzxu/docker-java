@@ -3,7 +3,7 @@ FROM adoptopenjdk/openjdk11-openj9:latest AS jlink
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
 RUN ["jlink", "--compress=2","--strip-debug", \
-     "--no-header-files","--no-man-pages", \
+     "--no-man-pages", \
      "--module-path", "/opt/java/openjdk/jmods", \
      "--add-modules", "java.base,java.desktop,java.instrument,java.logging,java.management,java.net.http,java.naming,java.rmi,java.security.jgss,java.sql,java.sql.rowset,java.xml", \  
      "--bind-services",\ 
