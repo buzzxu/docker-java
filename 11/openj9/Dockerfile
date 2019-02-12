@@ -34,6 +34,7 @@ COPY --from=jlink /jre /opt/jre/
 
 ENV TZ Asia/Shanghai
 ENV LANG C.UTF-8
-ENV JAVA_VERSION 11.0.1
+ENV JAVA_VERSION 11.0.2+7
 ENV JAVA_HOME /java-home
 ENV PATH $PATH:$JAVA_HOME/bin
+ENV JAVA_TOOL_OPTIONS="-XX:+UseContainerSupport"
