@@ -14,7 +14,6 @@ LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
 RUN apk update && apk upgrade && \
     apk add --no-cache -U ca-certificates tzdata&& \
-    rm /etc/localtime && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \ 
     echo "Asia/Shanghai" > /etc/timezone && \
     mkdir -p /opt/jre && \
