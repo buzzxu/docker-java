@@ -10,7 +10,6 @@ LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
 RUN apk update && apk upgrade && \
     apk add --no-cache -U tzdata font-adobe-100dpi fontconfig ttf-dejavu && \
-    rm /etc/localtime && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \ 
     echo "Asia/Shanghai" > /etc/timezone && \
     mkdir -p /opt/jre && \

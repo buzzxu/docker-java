@@ -8,12 +8,12 @@ RUN ["jlink", "--compress=2","--strip-debug", \
      "--bind-services",\ 
      "--output", "/jre"]  
 
-FROM buzzxu/alpine:latest     
+FROM buzzxu/alpine-glibc:latest     
 
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
 RUN apk update && apk upgrade && \
-    rm /etc/localtime && \
+    apk add --no-cache -U tzdata && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \ 
     echo "Asia/Shanghai" > /etc/timezone && \
     mkdir -p /opt/jre && \

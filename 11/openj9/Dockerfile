@@ -8,7 +8,7 @@ RUN ["jlink", "--compress=2","--strip-debug", \
      "--bind-services",\ 
      "--output", "/jre"]  
 
-FROM frolvlad/alpine-glibc:alpine-3.9_glibc-2.29     
+FROM buzzxu/alpine-glibc:latest     
 
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
