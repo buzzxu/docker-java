@@ -1,10 +1,21 @@
-FROM openjdk:12-alpine AS jlink
+FROM buzzxu/alpine-glibc:latest  AS jlink   
 
-RUN jdir=$(dirname $(dirname $(find / -name javac))) && \
-    jlink --compress=2  --no-man-pages --no-header-files --module-path ${jdir}/jmods  --add-modules java.base,java.desktop,java.instrument,java.logging,java.management,java.net.http,java.naming,java.rmi,java.security.jgss,java.sql,java.sql.rowset,java.xml,jdk.unsupported --bind-services --output /jre
+ARG JAVA_VERSION=jdk-12
+ARG JAVA_TAR_FILE=${JAVA_VERSION}_linux-x64_bin.tar.gz
+ENV JAVA_HOME=/usr/local/${JAVA_VERSION}
 
+RUN cd /tmp && \
+    apk add wget tar gzip && \
+    wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/12+33/312335d836a34c7c8bba9d963e26dc23/${JAVA_TAR_FILE}" && \
+    tar zxvf ${JAVA_TAR_FILE} -C /usr/local && \
+    echo "JAVA_HOME=$JAVA_HOME" >> /etc/profile && \
+    echo "PATH=$PATH:$JAVA_HOME/bin" >> /etc/profile && \
+    echo "export PATH JAVA_HOME" >> /etc/profile && \
+    source /etc/profile && \
+    jdir=$(dirname $(dirname $(find / -name javac))) && \
+    jlink --compress=2  --no-man-pages --no-header-files --module-path ${jdir}/jmods  --add-modules java.base,java.desktop,java.instrument,java.logging,java.management,java.net.http,java.naming,java.rmi,java.security.jgss,java.sql,java.sql.rowset,java.xml,jdk.unsupported --bind-services --output /jre  
 
-FROM alpine:latest
+FROM buzzxu/alpine-glibc:latest
 
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
@@ -15,15 +26,15 @@ RUN apk update && apk upgrade && \
     mkdir -p /opt/jre && \
     chmod a+x /opt/jre && \
     ln -svT /opt/jre /java-home && \
-    apk del curl ca-certificates openssl xz && \
     rm -rf /var/cache/apk/* && \
     rm -rf /tmp/*
 
 COPY --from=jlink /jre /opt/jre/ 
     
 ENV TZ Asia/Shanghai
-ENV LANG C.UTF-8
 ENV JAVA_HOME /java-home
-ENV JAVA_VERSION 12-ea+29
-ENV PATH $PATH:$JAVA_HOME/bin
+ENV JAVA_VERSION 12
+ENV PATH $PATH:$JAVA_HOME/bin      
+
+
 
