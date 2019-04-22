@@ -13,9 +13,7 @@ FROM buzzxu/alpine-glibc:latest
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
 RUN apk update && apk upgrade && \
-    apk add --no-cache -U ca-certificates tzdata&& \
-    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \ 
-    echo "Asia/Shanghai" > /etc/timezone && \
+    apk add --no-cache -U ca-certificates && \
     mkdir -p /opt/jre && \
     chmod a+x /opt/jre && \
     ln -svT /opt/jre /java-home && \

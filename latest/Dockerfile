@@ -1,12 +1,12 @@
 FROM buzzxu/alpine-glibc:latest  AS jlink   
 
-ARG JAVA_VERSION=jdk-12
+ARG JAVA_VERSION=jdk-12.0.1
 ARG JAVA_TAR_FILE=${JAVA_VERSION}_linux-x64_bin.tar.gz
 ENV JAVA_HOME=/usr/local/${JAVA_VERSION}
 
 RUN cd /tmp && \
     apk add wget tar gzip && \
-    wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/12+33/312335d836a34c7c8bba9d963e26dc23/${JAVA_TAR_FILE}" && \
+    wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/12.0.1+12/69cfe15208a647278a19ef0990eea691/${JAVA_TAR_FILE}" && \
     tar zxvf ${JAVA_TAR_FILE} -C /usr/local && \
     echo "JAVA_HOME=$JAVA_HOME" >> /etc/profile && \
     echo "PATH=$PATH:$JAVA_HOME/bin" >> /etc/profile && \
@@ -20,9 +20,6 @@ FROM buzzxu/alpine-glibc:latest
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
 RUN apk update && apk upgrade && \
-    apk add --no-cache -U tzdata font-adobe-100dpi fontconfig ttf-dejavu && \
-    ln -sv /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    echo "Asia/Shanghai" > /etc/timezone && \
     mkdir -p /opt/jre && \
     chmod a+x /opt/jre && \
     ln -svT /opt/jre /java-home && \
@@ -31,9 +28,8 @@ RUN apk update && apk upgrade && \
 
 COPY --from=jlink /jre /opt/jre/ 
     
-ENV TZ Asia/Shanghai
 ENV JAVA_HOME /java-home
-ENV JAVA_VERSION 12
+ENV JAVA_VERSION 12.0.1+12
 ENV PATH $PATH:$JAVA_HOME/bin      
 
 
