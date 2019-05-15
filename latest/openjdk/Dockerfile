@@ -1,6 +1,7 @@
-FROM openjdk:12-alpine AS jlink
+FROM azul/zulu-openjdk-alpine:12 AS jlink
 
-RUN jdir=$(dirname $(dirname $(find / -name javac))) && \
+# jdir=$(dirname $(dirname $(find / -name javac)))
+RUN jdir=$(dirname $(dirname $(find /usr/lib/jvm -name javac))) && \
     jlink --compress=2  --no-man-pages --no-header-files --module-path ${jdir}/jmods  --add-modules java.base,java.desktop,java.instrument,java.logging,java.management,java.net.http,java.naming,java.rmi,java.security.jgss,java.sql,java.sql.rowset,java.xml,jdk.unsupported --bind-services --output /jre
 
 
@@ -24,6 +25,6 @@ COPY --from=jlink /jre /opt/jre/
 ENV TZ Asia/Shanghai
 ENV LANG C.UTF-8
 ENV JAVA_HOME /java-home
-ENV JAVA_VERSION 12-ea+29
+ENV JAVA_VERSION 12
 ENV PATH $PATH:$JAVA_HOME/bin
 

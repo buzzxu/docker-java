@@ -23,7 +23,7 @@ RUN apk update && apk upgrade && \
 COPY --from=jlink /jre /opt/jre/ 
 
 ENV TZ Asia/Shanghai
-ENV JAVA_VERSION 11.0.2
+ENV JAVA_VERSION 11.0.3
 ENV JAVA_HOME /java-home
 ENV PATH $PATH:$JAVA_HOME/bin
 ENV JAVA_TOOL_OPTIONS="-XX:+UseContainerSupport"

@@ -29,7 +29,7 @@ RUN apk update && apk upgrade && \
 COPY --from=jlink /jre /opt/jre/ 
     
 ENV JAVA_HOME /java-home
-ENV JAVA_VERSION 12.0.1+12
+ENV JAVA_VERSION 12
 ENV PATH $PATH:$JAVA_HOME/bin      
 
 
