@@ -17,6 +17,6 @@ RUN apk update && apk upgrade && \
 COPY --from=jlink /jre /opt/jre/ 
 
 
-ENV JAVA_VERSION 11.0.3
+ENV JAVA_VERSION 11.0.4
 ENV JAVA_HOME /java-home
 ENV PATH $PATH:$JAVA_HOME/bin

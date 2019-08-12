@@ -24,6 +24,6 @@ COPY --from=jlink /jre /opt/jre/
 ENV TZ Asia/Shanghai
 ENV LANG C.UTF-8
 ENV JAVA_HOME /java-home
-ENV JAVA_VERSION 12-ea+29
+ENV JAVA_VERSION 13-ea+30
 ENV PATH $PATH:$JAVA_HOME/bin
 
