@@ -1,4 +1,4 @@
-FROM azul/zulu-openjdk-alpine:12 AS jlink
+FROM azul/zulu-openjdk-alpine:13 AS jlink
 
 # jdir=$(dirname $(dirname $(find / -name javac)))
 RUN jdir=$(dirname $(dirname $(find /usr/lib/jvm -name javac))) && \
@@ -25,6 +25,6 @@ COPY --from=jlink /jre /opt/jre/
 ENV TZ Asia/Shanghai
 ENV LANG C.UTF-8
 ENV JAVA_HOME /java-home
-ENV JAVA_VERSION 12
+ENV JAVA_VERSION 13
 ENV PATH $PATH:$JAVA_HOME/bin
 

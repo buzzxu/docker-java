@@ -1,4 +1,4 @@
-FROM openjdk:13-alpine AS jlink
+FROM openjdk:14-alpine AS jlink
 
 RUN jdir=$(dirname $(dirname $(find / -name javac))) && \
     jlink --compress=2  --no-man-pages --no-header-files --module-path ${jdir}/jmods  --add-modules java.base,java.desktop,java.instrument,java.logging,java.management,java.net.http,java.naming,java.rmi,java.security.jgss,java.sql,java.sql.rowset,java.xml,jdk.unsupported --bind-services --output /jre
@@ -24,6 +24,6 @@ COPY --from=jlink /jre /opt/jre/
 ENV TZ Asia/Shanghai
 ENV LANG C.UTF-8
 ENV JAVA_HOME /java-home
-ENV JAVA_VERSION 13-ea+30
+ENV JAVA_VERSION 14-ea+12
 ENV PATH $PATH:$JAVA_HOME/bin
 
