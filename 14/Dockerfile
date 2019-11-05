@@ -1,29 +1,36 @@
-FROM openjdk:14-alpine AS jlink
+FROM openjdk:14-slim-buster AS jlink
 
 RUN jdir=$(dirname $(dirname $(find / -name javac))) && \
     jlink --compress=2  --no-man-pages --no-header-files --module-path ${jdir}/jmods  --add-modules java.base,java.desktop,java.instrument,java.logging,java.management,java.net.http,java.naming,java.rmi,java.security.jgss,java.sql,java.sql.rowset,java.xml,jdk.unsupported --bind-services --output /jre
 
 
-FROM alpine:latest
+FROM debian:buster-slim 
 
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
-RUN apk update && apk upgrade && \
-    apk add --no-cache -U tzdata font-adobe-100dpi fontconfig ttf-dejavu && \
-    ln -sv /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+RUN rm -rf /var/lib/apt/lists/* && \  
+    apt-get clean && \
+    apt-get update -qq && \ 
+    apt-get upgrade -y && \
+    apt-get install -qq -y --no-install-recommends openssl libfontconfig1 && \
+    rm /etc/localtime && \
+    ln -sv /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \ 
     echo "Asia/Shanghai" > /etc/timezone && \
     mkdir -p /opt/jre && \
     chmod a+x /opt/jre && \
     ln -svT /opt/jre /java-home && \
-    apk del curl ca-certificates openssl xz && \
-    rm -rf /var/cache/apk/* && \
-    rm -rf /tmp/*
+    apt-get autoclean && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/* 
+
+COPY --from=jlink /jre /opt/jre/ 
 
 COPY --from=jlink /jre /opt/jre/ 
     
 ENV TZ Asia/Shanghai
 ENV LANG C.UTF-8
 ENV JAVA_HOME /java-home
-ENV JAVA_VERSION 14-ea+12
+ENV JAVA_VERSION 14
 ENV PATH $PATH:$JAVA_HOME/bin
 
