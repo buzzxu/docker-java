@@ -39,7 +39,8 @@ COPY --from=jlink /jre /opt/jre/
     
 ENV JAVA_HOME /java-home
 ENV JAVA_VERSION 13
-ENV PATH $PATH:$JAVA_HOME/bin      
+ENV PATH $PATH:$JAVA_HOME/bin
+CMD ["jshell"]  
 
 
 
