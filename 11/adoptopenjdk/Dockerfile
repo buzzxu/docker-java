@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:debian-slim AS jlink
+FROM adoptopenjdk/openjdk11:debian AS jlink
 
 RUN ["jlink", "--compress=2","--strip-debug", \
      "--no-header-files",\
