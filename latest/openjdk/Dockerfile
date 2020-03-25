@@ -1,4 +1,4 @@
-FROM azul/zulu-openjdk-debian:13 AS jlink
+FROM azul/zulu-openjdk-debian:14 AS jlink
 
 # jdir=$(dirname $(dirname $(find / -name javac)))
 RUN jdir=$(dirname $(dirname $(find /usr/lib/jvm -name javac))) && \
