@@ -31,7 +31,7 @@ COPY --from=jlink /jre /opt/jre/
 ENV TZ Asia/Shanghai
 ENV LANG C.UTF-8
 ENV JAVA_HOME /java-home
-ENV JAVA_VERSION 13
+ENV JAVA_VERSION 14
 ENV PATH $PATH:$JAVA_HOME/bin
 CMD ["jshell"]
 
