@@ -1,12 +1,12 @@
 FROM buzzxu/alpine-glibc:latest  AS jlink   
 
-ARG JAVA_VERSION=jdk-14
-ARG JAVA_TAR_FILE=${JAVA_VERSION}_linux-x64_bin.tar.gz
+ARG JAVA_VERSION=14.0.1
+ARG JAVA_TAR_FILE=jdk-${JAVA_VERSION}_linux-x64_bin.tar.gz
 ENV JAVA_HOME=/usr/local/${JAVA_VERSION}
 
 RUN cd /tmp && \
     apk add wget tar gzip && \
-    wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/14+36/076bab302c7b4508975440c56f6cc26a/${JAVA_TAR_FILE}" && \
+    wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}+7/664493ef4a6946b186ff29eb326336a2/${JAVA_TAR_FILE}" && \
     tar zxvf ${JAVA_TAR_FILE} -C /usr/local && \
     echo "JAVA_HOME=$JAVA_HOME" >> /etc/profile && \
     echo "PATH=$PATH:$JAVA_HOME/bin" >> /etc/profile && \
