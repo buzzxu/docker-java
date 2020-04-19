@@ -2,7 +2,7 @@ FROM buzzxu/alpine-glibc:latest  AS jlink
 
 ARG JAVA_VERSION=14.0.1
 ARG JAVA_TAR_FILE=jdk-${JAVA_VERSION}_linux-x64_bin.tar.gz
-ENV JAVA_HOME=/usr/local/${JAVA_VERSION}
+ENV JAVA_HOME=/usr/local/jdk-${JAVA_VERSION}
 
 RUN cd /tmp && \
     apk add wget tar gzip && \
