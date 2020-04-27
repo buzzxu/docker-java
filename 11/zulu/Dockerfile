@@ -18,7 +18,6 @@ RUN rm -rf /var/lib/apt/lists/* && \
     echo "Asia/Shanghai" > /etc/timezone && \
     mkdir -p /opt/jre && \
     chmod a+x /opt/jre && \
-    ln -svT /opt/jre /java-home && \
     apt-get autoclean && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
@@ -27,10 +26,10 @@ RUN rm -rf /var/lib/apt/lists/* && \
 COPY --from=jlink /jre /opt/jre/ 
 
 
-ENV TZ Asia/Shanghai
-ENV LANG C.UTF-8
+ENV TZ=Asia/Shanghai
+ENV LANG='C.UTF-8' LC_ALL='C.UTF-8'
 ENV JAVA_VERSION 11
-ENV JAVA_HOME /java-home
-ENV PATH $PATH:$JAVA_HOME/bin
+ENV JAVA_HOME=/opt/jre \
+    PATH="/opt/jre/bin:$PATH"
 CMD ["jshell"]
 

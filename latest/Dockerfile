@@ -37,12 +37,12 @@ RUN rm -rf /var/lib/apt/lists/* && \
 COPY --from=jlink /jre /opt/jre/ 
     
 
-ENV JAVA_VERSION 14
 ENV TZ=Asia/Shanghai
 ENV LANG='C.UTF-8' LC_ALL='C.UTF-8'
+ENV JAVA_VERSION 14
 ENV JAVA_HOME=/opt/jre \
-    PATH=$PATH:$JAVA_HOME/bin
-#CMD ["jshell"]
+    PATH="/opt/jre/bin:$PATH"
+CMD ["jshell"]
 
 
 
