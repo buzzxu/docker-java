@@ -5,7 +5,9 @@ ARG JAVA_TAR_FILE=jdk-${JAVA_VERSION}_linux-x64_bin.tar.gz
 ENV JAVA_HOME=/usr/local/jdk-${JAVA_VERSION}
 
 RUN cd /tmp && \
-    apk add wget tar gzip && \
+    apt-get update -qq && \ 
+    apt-get upgrade -y && \
+    apt-get install -qq -y --no-install-recommends wget tar gzip && \
     wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}+7/0d1cfde4252546c6931946de8db48ee2/${JAVA_TAR_FILE}" && \
     tar zxvf ${JAVA_TAR_FILE} -C /usr/local && \
     echo "JAVA_HOME=$JAVA_HOME" >> /etc/profile && \
