@@ -4,7 +4,8 @@ ARG JAVA_VERSION=15.0.2
 ARG JAVA_TAR_FILE=jdk-${JAVA_VERSION}_linux-x64_bin.tar.gz
 ENV JAVA_HOME=/usr/local/jdk-${JAVA_VERSION}
 
-RUN cd /tmp && \
+RUN set -eux; \
+    cd /tmp && \
     apk add wget tar gzip binutils && \
     wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}+7/0d1cfde4252546c6931946de8db48ee2/${JAVA_TAR_FILE}" && \
     tar zxvf ${JAVA_TAR_FILE} -C /usr/local && \
@@ -23,7 +24,7 @@ RUN rm -rf /var/lib/apt/lists/* && \
     apt-get clean && \
     apt-get update -qq && \ 
     apt-get upgrade -y && \
-    apt-get install -qq -y --no-install-recommends openssl libfontconfig1 ca-certificates && \
+    apt-get install -qq -y --no-install-recommends openssl libfontconfig1 ca-certificates p11-kit && \
     update-ca-certificates && \
     rm /etc/localtime && \
     ln -sv /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \ 

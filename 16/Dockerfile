@@ -1,6 +1,9 @@
 FROM openjdk:16-slim-buster AS jlink
 
-RUN jdir=$(dirname $(dirname $(find / -name javac))) && \
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends binutils && \
+    jdir=$(dirname $(dirname $(find / -name javac))) && \
     jlink --compress=2  --no-man-pages --no-header-files --strip-debug --module-path ${jdir}/jmods  --add-modules java.base,java.desktop,java.instrument,java.logging,java.management,java.net.http,java.naming,java.rmi,java.security.jgss,java.sql,java.sql.rowset,java.xml,jdk.unsupported,java.scripting,jdk.dynalink,jdk.incubator.foreign,jdk.jdwp.agent,jdk.jsobject,jdk.net,jdk.nio.mapmode,jdk.sctp --bind-services --output /jre
 
 
@@ -12,7 +15,7 @@ RUN rm -rf /var/lib/apt/lists/* && \
     apt-get clean && \
     apt-get update -qq && \ 
     apt-get upgrade -y && \
-    apt-get install -qq -y --no-install-recommends openssl libfontconfig1 ca-certificates && \
+    apt-get install -qq -y --no-install-recommends openssl libfontconfig1 ca-certificates p11-kit && \
     update-ca-certificates && \
     rm /etc/localtime && \
     ln -sv /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \ 
