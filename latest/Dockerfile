@@ -1,4 +1,4 @@
-FROM buzzxu/alpine-glibc:latest AS jlink   
+FROM debian:buster-slim AS jlink   
 
 ARG JAVA_VERSION=16
 ARG JAVA_TAR_FILE=jdk-${JAVA_VERSION}_linux-x64_bin.tar.gz
