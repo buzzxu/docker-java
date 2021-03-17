@@ -6,7 +6,9 @@ ENV JAVA_HOME=/usr/local/jdk-${JAVA_VERSION}
 
 RUN set -eux; \
     cd /tmp && \
-    apk add wget tar gzip binutils && \
+    # apk add wget tar gzip binutils && \
+    apt-get update; \
+    apt-get install -y --no-install-recommends binutils && \
     wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}+36/7863447f0ab643c585b9bdebf67c69db/${JAVA_TAR_FILE}" && \
     tar zxvf ${JAVA_TAR_FILE} -C /usr/local && \
     echo "JAVA_HOME=$JAVA_HOME" >> /etc/profile && \
