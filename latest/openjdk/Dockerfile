@@ -1,4 +1,4 @@
-FROM azul/zulu-openjdk-debian:15 AS jlink
+FROM azul/zulu-openjdk-debian:16 AS jlink
 
 # jdir=$(dirname $(dirname $(find / -name javac)))
 RUN set -eux; \
@@ -34,7 +34,7 @@ COPY --from=jlink /jre /opt/jre/
     
 ENV TZ=Asia/Shanghai
 ENV LANG='C.UTF-8' LC_ALL='C.UTF-8'
-ENV JAVA_VERSION 14
+ENV JAVA_VERSION 16
 ENV JAVA_HOME=/opt/jre \
     PATH="/opt/jre/bin:$PATH"
 
