@@ -1,6 +1,6 @@
 FROM debian:buster-slim AS jlink   
 
-ARG JAVA_VERSION=16
+ARG JAVA_VERSION=16.0.1
 ARG JAVA_TAR_FILE=jdk-${JAVA_VERSION}_linux-x64_bin.tar.gz
 ENV JAVA_HOME=/usr/local/jdk-${JAVA_VERSION}
 
@@ -9,7 +9,7 @@ RUN set -eux; \
     # apk add wget tar gzip binutils && \
     apt-get update; \
     apt-get install -y --no-install-recommends wget binutils && \
-    wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}+36/7863447f0ab643c585b9bdebf67c69db/${JAVA_TAR_FILE}" && \
+    wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}+9/7147401fd7354114ac51ef3e1328291f/${JAVA_TAR_FILE}" && \
     tar zxvf ${JAVA_TAR_FILE} -C /usr/local && \
     echo "JAVA_HOME=$JAVA_HOME" >> /etc/profile && \
     echo "PATH=$PATH:$JAVA_HOME/bin" >> /etc/profile && \
