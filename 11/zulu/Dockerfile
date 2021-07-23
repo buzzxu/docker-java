@@ -7,14 +7,14 @@ RUN jdir=$(dirname $(dirname $(find /usr/lib/jvm -name javac))) && \
 FROM debian:buster-slim
 
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
-
+  
 COPY fonts/ /usr/share/fonts/
 
 RUN rm -rf /var/lib/apt/lists/* && \  
     apt-get clean && \
     apt-get update -qq && \ 
     apt-get upgrade -y && \
-    apt-get install -qq -y --no-install-recommends openssl libfontconfig1 ca-certificates && \
+    apt-get install -qq -y --no-install-recommends openssl fontconfig libfontconfig1 ca-certificates && \
     update-ca-certificates && \
     rm /etc/localtime && \
     ln -sv /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \ 
