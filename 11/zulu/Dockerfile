@@ -8,6 +8,8 @@ FROM debian:buster-slim
 
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
+COPY fonts/ /usr/share/fonts/
+
 RUN rm -rf /var/lib/apt/lists/* && \  
     apt-get clean && \
     apt-get update -qq && \ 
@@ -19,6 +21,7 @@ RUN rm -rf /var/lib/apt/lists/* && \
     echo "Asia/Shanghai" > /etc/timezone && \
     mkdir -p /opt/jre && \
     chmod a+x /opt/jre && \
+    fc-cache -vf && \
     apt-get autoclean && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
