@@ -1,4 +1,4 @@
-name: JDK 11
+name: JDK 8
 
 on:
   push:
