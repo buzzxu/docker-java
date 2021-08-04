@@ -1,4 +1,4 @@
-FROM azul/zulu-openjdk-debian:8 AS jlink
+FROM azul/zulu-openjdk-debian:8 AS jdk
 
 FROM debian:buster-slim
 
@@ -23,7 +23,7 @@ RUN rm -rf /var/lib/apt/lists/* && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/* 
 
-COPY --from=jlink /jre /opt/jre/ 
+COPY --from=jdk /usr/lib/jvm /opt/jre/ 
 
 
 ENV TZ=Asia/Shanghai
