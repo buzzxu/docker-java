@@ -40,60 +40,39 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - 
-        name: Push Zulu to Docker Hub
+        name: Build and Push(Zulu)
         uses: docker/build-push-action@v2
         with:
           context: .
           file: 11/zulu/Dockerfile
           push: true
-          tags: buzzxu/java:11-zulu
-      - 
-        name: Push Zulu to Github packages
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: 11/zulu/Dockerfile
-          push: true
-          tags: docker.pkg.github.com/${{ github.repository }}/java:11-zulu
-      - name: Push adoptopenjdk to Docker Hub
+          tags: |
+            buzzxu/java:11-zulu
+            ghcr.io/buzzxu/java:11-zulu
+      - name: Build and Push(adoptopenjdk)
         uses: docker/build-push-action@v2
         with:
           context: .
           file: 11/adoptopenjdk/Dockerfile
           push: true
-          tags: buzzxu/java:11-adoptopenjdk
-      - name: Push adoptopenjdk to Github packages
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: 11/adoptopenjdk/Dockerfile
-          push: true
-          tags: docker.pkg.github.com/${{ github.repository }}/java:11-adoptopenjdk
-      - name: Push adoptopenjdk-openJ9 to Docker Hub
+          tags: |
+            buzzxu/java:11-adoptopenjdk
+            ghcr.io/buzzxu/java:11-adoptopenjdk
+      - name: Build and Push(adoptopenjdk-openJ9)
         uses: docker/build-push-action@v2
         with:
           context: .
           file: 11/adoptopenjdk-openj9/Dockerfile
           push: true
-          tags: buzzxu/java:11-openj9
-      - name: Push adoptopenjdk-openJ9 to Github packages
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: 11/adoptopenjdk-openj9/Dockerfile
-          push: true
-          tags: docker.pkg.github.com/${{ github.repository }}/java:11-openj9
-      - name: Push 11 to Docker Hub
+          tags: |
+            buzzxu/java:11-openj9
+            ghcr.io/buzzxu/java:11-openj9
+      - name: Build and Push(11)
         uses: docker/build-push-action@v2
         with:
           context: .
           file: 11/corretto/Dockerfile
           push: true
-          tags: buzzxu/java:11
-      - name: Push 11 to Github packages
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: 11/corretto/Dockerfile
-          push: true
-          tags: docker.pkg.github.com/${{ github.repository }}/java:11
+          tags: |
+            buzzxu/java:11
+            ghcr.io/buzzxu/java/java:11
