@@ -23,12 +23,12 @@ RUN rm -rf /var/lib/apt/lists/* && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/* 
 
-COPY --from=jdk /usr/lib/jvm /opt/jre/ 
+COPY --from=jdk /usr/lib/jvm/zulu8 /opt/jre/ 
 
 
 ENV TZ=Asia/Shanghai
 ENV LANG='C.UTF-8' LC_ALL='C.UTF-8'
-ENV JAVA_VERSION 11
+ENV JAVA_VERSION 8
 ENV JAVA_HOME=/opt/jre \
     PATH="/opt/jre/bin:$PATH"
 
