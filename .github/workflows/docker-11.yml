@@ -48,7 +48,7 @@ jobs:
           push: true
           tags: |
             buzzxu/java:11
-            ghcr.io/buzzxu/java/java:11
+            ghcr.io/buzzxu/java:11
   zulu:
     name: zulu
     runs-on: ubuntu-latest
