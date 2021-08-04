@@ -36,36 +36,25 @@ jobs:
         name: Log in to GitHub Docker Registry
         uses: docker/login-action@v1
         with:
-          registry: docker.pkg.github.com
-          username: ${{ github.actor }}
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - 
-        name: Push to Docker Hub
+        name: Build and push
         uses: docker/build-push-action@v2
         with:
           context: .
           file: latest/Dockerfile
           push: true
-          tags: buzzxu/java:latest
-      - 
-        name: Push to Github packages
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: latest/Dockerfile
-          push: true
-          tags: docker.pkg.github.com/${{ github.repository }}/java:latest
-      - name: Push Openjdk to Docker Hub
+          tags: |
+            buzzxu/java:latest
+            ghcr.io/buzzxu/java:latest
+      - name: Build and push(Openjdk)
         uses: docker/build-push-action@v2
         with:
           context: .
           file: latest/openjdk/Dockerfile
           push: true
-          tags: buzzxu/java:latest-openjdk
-      - name: Push Openjdk to Github packages
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: latest/openjdk/Dockerfile
-          push: true
-          tags: docker.pkg.github.com/${{ github.repository }}/java:latest-openjdk
+          tags: |
+            buzzxu/java:latest-openjdk
+            ghcr.io/buzzxu/java:latest-openjdk
