@@ -11,6 +11,8 @@ FROM debian:buster-slim
 
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
+COPY fonts/ /usr/share/fonts/
+
 RUN rm -rf /var/lib/apt/lists/* && \  
     apt-get clean && \
     apt-get update -qq && \ 
@@ -22,6 +24,7 @@ RUN rm -rf /var/lib/apt/lists/* && \
     echo "Asia/Shanghai" > /etc/timezone && \
     mkdir -p /opt/jre && \
     chmod a+x /opt/jre && \
+    fc-cache -vf && \
     ln -svT /opt/jre /java-home && \
     apt-get autoclean && \
     apt-get clean && \
@@ -32,7 +35,7 @@ COPY --from=jlink /jre /opt/jre/
     
 ENV TZ=Asia/Shanghai
 ENV LANG='C.UTF-8' LC_ALL='C.UTF-8'
-ENV JAVA_VERSION 16
+ENV JAVA_VERSION 17
 ENV JAVA_HOME=/opt/jre \
     PATH="/opt/jre/bin:$PATH"
 
