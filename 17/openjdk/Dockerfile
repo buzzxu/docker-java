@@ -1,4 +1,4 @@
-FROM azul/zulu-openjdk-debian:16 AS jlink
+FROM azul/zulu-openjdk-debian:17 AS jlink
 
 # jdir=$(dirname $(dirname $(find / -name javac)))
 RUN set -eux; \

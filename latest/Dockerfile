@@ -1,6 +1,6 @@
 FROM debian:buster-slim AS jlink   
 
-ARG JAVA_VERSION=16.0.2
+ARG JAVA_VERSION=17
 ARG JAVA_TAR_FILE=jdk-${JAVA_VERSION}_linux-x64_bin.tar.gz
 ENV JAVA_HOME=/usr/local/jdk-${JAVA_VERSION}
 
@@ -9,7 +9,7 @@ RUN set -eux; \
     # apk add wget tar gzip binutils && \
     apt-get update; \
     apt-get install -y --no-install-recommends wget binutils && \
-    wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}+7/d4a915d82b4c4fbb9bde534da945d746/${JAVA_TAR_FILE}" && \
+    wget --no-check-certificate -c "https://download.oracle.com/java/${JAVA_VERSION}/archive/${JAVA_TAR_FILE}" && \
     tar zxvf ${JAVA_TAR_FILE} -C /usr/local && \
     echo "JAVA_HOME=$JAVA_HOME" >> /etc/profile && \
     echo "PATH=$PATH:$JAVA_HOME/bin" >> /etc/profile && \
@@ -46,9 +46,6 @@ COPY --from=jlink /jre /opt/jre/
 
 ENV TZ=Asia/Shanghai
 ENV LANG='C.UTF-8' LC_ALL='C.UTF-8'
-ENV JAVA_VERSION 16
+ENV JAVA_VERSION 17
 ENV JAVA_HOME=/opt/jre \
     PATH="/opt/jre/bin:$PATH"
-
-
-
