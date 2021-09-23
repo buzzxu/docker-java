@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11-openj9:debianslim AS jlink
+FROM adoptopenjdk/openjdk11-openj9:debian-jre AS jlink
 
 
 FROM debian:buster-slim       
