@@ -1,12 +1,5 @@
-FROM adoptopenjdk/openjdk11-openj9:debian-slim AS jlink
+FROM adoptopenjdk/openjdk11-openj9:debianslim AS jlink
 
-RUN ["jlink", "--compress=2","--strip-debug", \
-     "--no-header-files",\
-     "--no-man-pages", \
-     "--module-path", "/opt/java/openjdk/jmods", \
-     "--add-modules", "java.base,java.desktop,java.instrument,java.logging,java.management,java.net.http,java.naming,java.rmi,java.security.jgss,java.sql,java.sql.rowset,java.xml,jdk.unsupported,jdk.jdwp.agent", \  
-     "--bind-services",\ 
-     "--output", "/jre"]
 
 FROM debian:buster-slim       
 
@@ -31,7 +24,7 @@ RUN rm -rf /var/lib/apt/lists/* && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/* 
     
-COPY --from=jlink /jre /opt/jre/ 
+COPY --from=jlink /jre /opt/java/openjdk
 
 
 ENV TZ=Asia/Shanghai
@@ -39,3 +32,4 @@ ENV LANG='C.UTF-8' LC_ALL='C.UTF-8'
 ENV JAVA_VERSION 11
 ENV JAVA_HOME=/opt/jre \
     PATH="/opt/jre/bin:$PATH"
+ENV JAVA_TOOL_OPTIONS="-XX:+IgnoreUnrecognizedVMOptions -XX:+IdleTuningGcOnIdle -Xshareclasses:name=openj9_system_scc,cacheDir=/opt/java/.scc,readonly,nonFatal"
