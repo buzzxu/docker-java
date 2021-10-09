@@ -1,13 +1,15 @@
 FROM eclipse-temurin:17-alpine AS jlink
 
 
-RUN $JAVA_HOME/bin/jlink \
+RUN apk update && apk upgrade && \
+    apk add --no-cache binutils tar && \
+    $JAVA_HOME/bin/jlink \
         --compress=2  \
         --no-man-pages \
         --no-header-files \
         --strip-debug \
         --module-path $JAVA_HOME/jmods \
-        --add-modules java.base,java.desktop,java.instrument,java.logging,java.management,java.net.http,java.naming,java.rmi,java.security.jgss,java.sql,java.sql.rowset,java.xml,jdk.unsupported,java.scripting,jdk.dynalink,jdk.incubator.foreign,jdk.jdwp.agent,jdk.jsobject,jdk.net,jdk.nio.mapmode,jdk.sctp,jdk.xml.dom,jdk.zipfs \
+        --add-modules java.base,java.desktop,java.instrument,java.logging,java.management,java.net.http,java.naming,jdk.naming.dns,java.rmi,java.security.jgss,jdk.crypto.ec,java.sql,java.sql.rowset,java.xml,jdk.unsupported,java.scripting,jdk.dynalink,jdk.incubator.foreign,jdk.jdwp.agent,jdk.jsobject,jdk.net,jdk.nio.mapmode,jdk.sctp,jdk.xml.dom,jdk.zipfs \
         --bind-services \
         --output /jre
  
