@@ -47,6 +47,5 @@ jobs:
           file: latest/Dockerfile
           push: true
           tags: |
-            buzzxu/java:17
             buzzxu/java:latest
             ghcr.io/buzzxu/java:latest

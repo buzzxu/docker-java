@@ -2,10 +2,14 @@ name: JDK 17
 
 on:
   push:
-    branches: [ 17 ]
+    branches: 
+     - master
+     - 17
     tags: [ 'v*.*.*' ]
   pull_request:
-    branches: [ 17 ]
+    branches: 
+     - master
+     - 17
 
 env:
   REGISTRY: ghcr.io
@@ -76,7 +80,7 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - 
-        name: Build and push(Openjdk)
+        name: Build and push(Corretto)
         uses: docker/build-push-action@v2
         with:
           context: .
@@ -96,7 +100,7 @@ jobs:
             buzzxu/java:17-zulu
             ghcr.io/buzzxu/java:17-zulu
       - 
-        name: Build and push(Zulu-Alpine)
+        name: Build and push(Adoptium-alpine)
         uses: docker/build-push-action@v2
         with:
           context: .
