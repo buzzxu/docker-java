@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-alpine AS jlink
+FROM amazoncorrettoamazoncorrettoamazoncorretto:17-alpine AS jlink
 
 
 RUN apk update && apk upgrade && \
@@ -21,7 +21,7 @@ COPY fonts/ /usr/share/fonts/
 
 RUN apk update && apk upgrade && \
     apk add --no-cache -U tzdata font-adobe-100dpi fontconfig ttf-dejavu && \
-    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \ 
+    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \ 
     echo "Asia/Shanghai" > /etc/timezone && \
     mkdir -p /opt/jre && \
     chmod a+x /opt/jre && \
