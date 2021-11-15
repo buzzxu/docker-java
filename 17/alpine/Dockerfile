@@ -1,4 +1,4 @@
-FROM amazoncorrettoamazoncorrettoamazoncorretto:17-alpine AS jlink
+FROM amazoncorretto:17-alpine AS jlink
 
 
 RUN apk update && apk upgrade && \
