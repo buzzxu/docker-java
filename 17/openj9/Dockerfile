@@ -23,7 +23,7 @@ RUN rm -rf /var/lib/apt/lists/* && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/* 
     
-COPY --from=jlink /jre /opt/java/openjdk
+COPY --from=jlink /opt/java/openjdk /opt/java/openjdk
 
 
 ENV TZ=Asia/Shanghai
