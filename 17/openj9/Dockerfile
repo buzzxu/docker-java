@@ -1,4 +1,4 @@
-FROM ibm-semeru-runtimes:open-16-jre-focal AS jlink
+FROM ibm-semeru-runtimes:open-17-jre-focal AS jlink
 
 FROM debian:buster-slim       
 

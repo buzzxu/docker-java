@@ -1,4 +1,4 @@
-FROM amazoncorretto:17-alpine AS jlink
+FROM amazoncorretto:17-jdk-alpine AS jlink
 
 
 RUN apk update && apk upgrade && \
