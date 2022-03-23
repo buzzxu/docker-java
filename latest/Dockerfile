@@ -9,7 +9,8 @@ RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends wget binutils && \
     wget --no-check-certificate -c "https://download.oracle.com/java/${JAVA_VERSION}/latest/${JAVA_TAR_FILE}" && \
-    tar zxvf ${JAVA_TAR_FILE} -C /usr/local && \
+    mkdir -p "$JAVA_HOME" && \
+    tar --extract --file ${JAVA_TAR_FILE} --directory "$JAVA_HOME" --strip-components 1 && \
     echo "JAVA_HOME=$JAVA_HOME" >> /etc/profile && \
     echo "PATH=$PATH:$JAVA_HOME/bin" >> /etc/profile && \
     echo "export PATH JAVA_HOME" >> /etc/profile && \
