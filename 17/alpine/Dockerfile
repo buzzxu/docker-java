@@ -1,4 +1,4 @@
-FROM amazoncorretto:17-jdk-alpine AS jlink
+FROM eclipse-temurin:17-jdk-alpine AS jlink
 
 
 RUN apk update && apk upgrade && \
