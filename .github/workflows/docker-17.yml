@@ -121,3 +121,23 @@ jobs:
           tags: |
             buzzxu/java:17-openj9
             ghcr.io/buzzxu/java:17-openj9
+      - 
+        name: Build and push(TencentKona)
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: 17/kona/Dockerfile
+          push: true
+          tags: |
+            buzzxu/java:17-kona
+            ghcr.io/buzzxu/java:17-kona
+       - 
+        name: Build and push(Dragonwell)
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: 17/dragonwell/Dockerfile
+          push: true
+          tags: |
+            buzzxu/java:17-dragonwell
+            ghcr.io/buzzxu/java:17-dragonwell
