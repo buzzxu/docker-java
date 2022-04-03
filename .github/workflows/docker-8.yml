@@ -7,7 +7,7 @@ on:
   pull_request:
     branches: [ master ]
   schedule:
-    - cron: '35 0 1 * *'
+    - cron: '30 0 28 3,6,9,12 *'
 
 env:
   REGISTRY: ghcr.io
