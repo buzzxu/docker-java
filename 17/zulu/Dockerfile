@@ -37,7 +37,7 @@ COPY --from=jlink /jre /opt/jre/
     
 ENV TZ=Asia/Shanghai
 ENV LANG='C.UTF-8' LC_ALL='C.UTF-8'
-ENV JAVA_VERSION 16
+ENV JAVA_VERSION 17
 ENV JAVA_HOME=/opt/jre \
     PATH="/opt/jre/bin:$PATH"
 
