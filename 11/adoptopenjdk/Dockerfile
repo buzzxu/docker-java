@@ -8,7 +8,7 @@ RUN ["jlink", "--compress=2","--strip-debug", \
      "--bind-services",\ 
      "--output", "/jre"]
 
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
 

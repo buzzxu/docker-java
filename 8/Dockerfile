@@ -1,6 +1,6 @@
 FROM azul/zulu-openjdk-debian:8 AS jdk
 
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
   

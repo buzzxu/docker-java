@@ -1,6 +1,6 @@
 FROM ibm-semeru-runtimes:open-17-jre-focal AS jlink
 
-FROM debian:buster-slim       
+FROM debian:bullseye-slim       
 
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
 

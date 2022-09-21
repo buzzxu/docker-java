@@ -1,7 +1,7 @@
-FROM debian:buster-slim AS jlink   
+FROM debian:bullseye-slim AS jlink   
 
-ARG JAVA_VERSION=17.0.2
-ARG JAVA_TAR_FILE=TencentKona-${JAVA_VERSION}.b1-jdk_linux-x86_64.tar.gz
+ARG JAVA_VERSION=17.0.4.1
+ARG JAVA_TAR_FILE=TencentKona-17.0.4.b2-jdk_linux-x86_64.tar.gz
 ENV JAVA_HOME=/usr/local/jdk-${JAVA_VERSION}
 
 
@@ -19,7 +19,7 @@ RUN set -eux; \
     jdir=$(dirname $(dirname $(find / -name javac))) && \
     $JAVA_HOME/bin/jlink --compress=2  --no-man-pages --no-header-files --strip-debug --module-path ${jdir}/jmods  --add-modules java.base,java.desktop,java.instrument,java.logging,java.management,java.net.http,java.naming,java.rmi,java.security.jgss,java.sql,java.sql.rowset,java.xml,jdk.unsupported,java.scripting,jdk.dynalink,jdk.incubator.foreign,jdk.jdwp.agent,jdk.jsobject,jdk.net,jdk.nio.mapmode,jdk.sctp,jdk.xml.dom,jdk.zipfs --bind-services --output /jre  
 
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
