@@ -20,7 +20,7 @@ env:
 
 jobs:
   jdk-17:
-    name: oracle
+    name: JDK-17
     runs-on: ubuntu-latest
     permissions:
       packages: write

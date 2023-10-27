@@ -16,7 +16,7 @@ env:
 
 jobs:
   latest:
-    name: oracle-jdk
+    name: Latest
     runs-on: ubuntu-latest
     permissions:
       packages: write
