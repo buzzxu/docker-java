@@ -55,3 +55,53 @@ jobs:
           tags: |
             buzzxu/java:21
             ghcr.io/buzzxu/java:21
+      - 
+          name: Build and push(Corretto)
+          uses: docker/build-push-action@v2
+          with:
+            context: .
+            file: 21/corretto/Dockerfile
+            push: true
+            tags: |
+              buzzxu/java:21-openjdk
+              ghcr.io/buzzxu/java:21-openjdk
+      - 
+        name: Build and push(Zulu)
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: 21/zulu/Dockerfile
+          push: true
+          tags: |
+            buzzxu/java:21-zulu
+            ghcr.io/buzzxu/java:21-zulu
+      - 
+        name: Build and push(Bellsoft)
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: 21/bellsoft/Dockerfile
+          push: true
+          tags: |
+            buzzxu/java:21-bellsoft
+            ghcr.io/buzzxu/java:21-bellsoft
+      - 
+        name: Build and push(Adoptium-alpine)
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: 21/alpine/Dockerfile
+          push: true
+          tags: |
+            buzzxu/java:21-alpine
+            ghcr.io/buzzxu/java:21-alpine
+      - 
+        name: Build and push(Dragonwell)
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: 21/dragonwell/Dockerfile
+          push: true
+          tags: |
+            buzzxu/java:21-dragonwell
+            ghcr.io/buzzxu/java:21-dragonwell

@@ -1,14 +1,15 @@
-FROM debian:bookworm-slim AS jlink   
+FROM debian:bullseye-slim AS jlink   
 
-ARG JAVA_VERSION=21
-ARG JAVA_TAR_FILE=jdk-${JAVA_VERSION}_linux-x64_bin.tar.gz
+ARG JAVA_VERSION=17.0.8
+ARG MINOR_VERSION=.0.8+7
+ARG JAVA_TAR_FILE=Alibaba_Dragonwell_Standard_${JAVA_VERSION}.0.8.7_x64_linux.tar.gz
 ENV JAVA_HOME=/usr/local/jdk-${JAVA_VERSION}
 
 RUN set -eux; \
     cd /tmp && \
     apt-get update; \
     apt-get install -y --no-install-recommends wget binutils && \
-    wget --no-check-certificate -c "https://download.oracle.com/java/${JAVA_VERSION}/latest/${JAVA_TAR_FILE}" && \
+    wget --no-check-certificate -c "https://github.com/dragonwell-project/dragonwell17/releases/download/dragonwell-standard-${JAVA_VERSION}${MINOR_VERSION}_jdk-${JAVA_VERSION}-ga/${JAVA_TAR_FILE}" && \
     mkdir -p "$JAVA_HOME" && \
     tar --extract --file ${JAVA_TAR_FILE} --directory "$JAVA_HOME" --strip-components 1 && \
     echo "JAVA_HOME=$JAVA_HOME" >> /etc/profile && \
@@ -18,7 +19,7 @@ RUN set -eux; \
     jdir=$(dirname $(dirname $(find / -name javac))) && \
     $JAVA_HOME/bin/jlink --compress=2  --no-man-pages --no-header-files --strip-debug --module-path ${jdir}/jmods  --add-modules java.base,java.desktop,java.instrument,java.logging,java.management,java.net.http,java.naming,java.rmi,java.security.jgss,java.sql,java.sql.rowset,java.xml,jdk.unsupported,java.scripting,jdk.dynalink,jdk.jdwp.agent,jdk.jsobject,jdk.net,jdk.nio.mapmode,jdk.sctp,jdk.xml.dom,jdk.zipfs --bind-services --output /jre  
 
-FROM debian:bookworm-slim
+FROM debian:bullseye-slim
 
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
@@ -46,6 +47,6 @@ COPY --from=jlink /jre /opt/jre/
 
 ENV TZ=Asia/Shanghai
 ENV LANG='C.UTF-8' LC_ALL='C.UTF-8'
-ENV JAVA_VERSION 21
+ENV JAVA_VERSION 17
 ENV JAVA_HOME=/opt/jre \
     PATH="/opt/jre/bin:$PATH"
