@@ -2,14 +2,14 @@ FROM buzzxu/docker:debian AS jlink
 
 ARG JAVA_VERSION=21.0.1
 ARG MINOR_VERSION=.0.1+12
-ARG JAVA_TAR_FILE=Alibaba_Dragonwell_Standard_${JAVA_VERSION}${MINOR_VERSION}_x64_linux.tar.gz
+ARG MINOR_VERSION$ =.0.1.12
+ARG JAVA_TAR_FILE=Alibaba_Dragonwell_Standard_${JAVA_VERSION}${MINOR_VERSION$}_x64_linux.tar.gz
 ENV JAVA_HOME=/usr/local/jdk-${JAVA_VERSION}
-
 RUN set -eux; \
     cd /tmp && \
     apt-get update; \
     apt-get install -y --no-install-recommends wget binutils && \
-    wget --no-check-certificate -c "https://github.com/dragonwell-project/dragonwell21/releases/tag/download/dragonwell-standard-${JAVA_VERSION}${MINOR_VERSION}_jdk-${JAVA_VERSION}-ga/${JAVA_TAR_FILE}" && \
+    wget --no-check-certificate -c "https://github.com/dragonwell-project/dragonwell21/releases/download/dragonwell-standard-${JAVA_VERSION}${MINOR_VERSION}_jdk-${JAVA_VERSION}-ga/${JAVA_TAR_FILE}" && \
     mkdir -p "$JAVA_HOME" && \
     tar --extract --file ${JAVA_TAR_FILE} --directory "$JAVA_HOME" --strip-components 1 && \
     echo "JAVA_HOME=$JAVA_HOME" >> /etc/profile && \

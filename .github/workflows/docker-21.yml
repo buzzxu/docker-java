@@ -96,6 +96,16 @@ jobs:
             buzzxu/java:21-alpine
             ghcr.io/buzzxu/java:21-alpine
       - 
+        name: Build and push(OpenJ9)
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: 21/openj9/Dockerfile
+          push: true
+          tags: |
+            buzzxu/java:21-openj9
+            ghcr.io/buzzxu/java:21-openj9
+      - 
         name: Build and push(Dragonwell)
         uses: docker/build-push-action@v5
         with:
