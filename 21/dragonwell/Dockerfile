@@ -2,8 +2,8 @@ FROM buzzxu/docker:debian AS jlink
 
 ARG JAVA_VERSION=21.0.1
 ARG MINOR_VERSION=.0.1+12
-ARG MINOR_VERSION$=.0.1.12
-ARG JAVA_TAR_FILE=Alibaba_Dragonwell_Standard_${JAVA_VERSION}${MINOR_VERSION$}_x64_linux.tar.gz
+ARG MINOR_VERSION1=.0.1.12
+ARG JAVA_TAR_FILE=Alibaba_Dragonwell_Standard_${JAVA_VERSION}${MINOR_VERSION1}_x64_linux.tar.gz
 ENV JAVA_HOME=/usr/local/jdk-${JAVA_VERSION}
 RUN set -eux; \
     cd /tmp && \
