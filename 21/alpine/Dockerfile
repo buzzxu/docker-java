@@ -9,7 +9,10 @@ RUN apk update && apk upgrade && \
         --no-header-files \
         --strip-debug \
         --module-path $JAVA_HOME/jmods \
-        --add-modules java.base,java.desktop,java.instrument,java.logging,java.management,java.net.http,java.naming,java.rmi,java.security.jgss,java.sql,java.sql.rowset,java.xml,jdk.unsupported,java.scripting,jdk.dynalink,jdk.jdwp.agent,jdk.jsobject,jdk.net,jdk.nio.mapmode,jdk.sctp,jdk.xml.dom,jdk.zipfs \
+        --add-modules \
+              java.base,java.desktop,java.instrument,java.logging,java.management,java.net.http,java.naming,java.rmi,java.security.jgss,java.sql,java.sql.rowset,java.xml, \
+              jdk.unsupported,java.scripting,jdk.dynalink,jdk.jdwp.agent,jdk.jsobject,jdk.net,jdk.nio.mapmode,jdk.sctp,jdk.xml.dom,jdk.zipfs, \
+              jdk.localedata,jdk.charsets,jdk.crypto.ec \
         --bind-services \
         --output /jre
  
