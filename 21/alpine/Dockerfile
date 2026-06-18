@@ -15,7 +15,7 @@ RUN apk update && apk upgrade && \
               jdk.localedata,jdk.charsets,jdk.crypto.ec \
         --bind-services \
         --output /jre
- 
+
 FROM alpine:latest
 
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
@@ -24,15 +24,15 @@ COPY fonts/ /usr/share/fonts/
 
 RUN apk update && apk upgrade && \
     apk add --no-cache -U tzdata font-adobe-100dpi fontconfig ttf-dejavu && \
-    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \ 
+    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" > /etc/timezone && \
     mkdir -p /opt/jre && \
     chmod a+x /opt/jre && \
     ln -svT /opt/jre /java-home && \
     rm -rf /var/cache/apk/* && \
-    rm -rf /tmp/* 
+    rm -rf /tmp/*
 
-COPY --from=jlink /jre /opt/jre/ 
+COPY --from=jlink /jre /opt/jre/
 
 ENV TZ=Asia/Shanghai
 ENV LANG='C.UTF-8' LC_ALL='C.UTF-8'

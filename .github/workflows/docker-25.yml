@@ -1,15 +1,15 @@
-name: JDK 21
+name: JDK 25
 
 on:
   push:
     branches:
      - master
-     - 21
+     - 25
     tags: [ 'v*.*.*' ]
   pull_request:
     branches:
      - master
-     - 21
+     - 25
   schedule:
     - cron: '10 0 28 2,3,6,9,11,12 *'
 
@@ -19,8 +19,8 @@ env:
 
 
 jobs:
-  jdk-21:
-    name: JDK-21
+  jdk-25:
+    name: JDK-25
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -50,68 +50,68 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: 21/Dockerfile
+          file: 25/Dockerfile
           push: true
           tags: |
-            buzzxu/java:21
-            ghcr.io/buzzxu/java:21
+            buzzxu/java:25
+            ghcr.io/buzzxu/java:25
       -
         name: Build and push(Corretto)
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: 21/corretto/Dockerfile
+          file: 25/corretto/Dockerfile
           push: true
           tags: |
-            buzzxu/java:21-openjdk
-            ghcr.io/buzzxu/java:21-openjdk
+            buzzxu/java:25-openjdk
+            ghcr.io/buzzxu/java:25-openjdk
       -
         name: Build and push(Zulu)
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: 21/zulu/Dockerfile
+          file: 25/zulu/Dockerfile
           push: true
           tags: |
-            buzzxu/java:21-zulu
-            ghcr.io/buzzxu/java:21-zulu
+            buzzxu/java:25-zulu
+            ghcr.io/buzzxu/java:25-zulu
       -
         name: Build and push(Bellsoft)
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: 21/bellsoft/Dockerfile
+          file: 25/bellsoft/Dockerfile
           push: true
           tags: |
-            buzzxu/java:21-bellsoft
-            ghcr.io/buzzxu/java:21-bellsoft
+            buzzxu/java:25-bellsoft
+            ghcr.io/buzzxu/java:25-bellsoft
       -
         name: Build and push(Adoptium-alpine)
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: 21/alpine/Dockerfile
+          file: 25/alpine/Dockerfile
           push: true
           tags: |
-            buzzxu/java:21-alpine
-            ghcr.io/buzzxu/java:21-alpine
+            buzzxu/java:25-alpine
+            ghcr.io/buzzxu/java:25-alpine
       -
         name: Build and push(OpenJ9)
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: 21/openj9/Dockerfile
+          file: 25/openj9/Dockerfile
           push: true
           tags: |
-            buzzxu/java:21-openj9
-            ghcr.io/buzzxu/java:21-openj9
+            buzzxu/java:25-openj9
+            ghcr.io/buzzxu/java:25-openj9
       -
         name: Build and push(Dragonwell)
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: 21/dragonwell/Dockerfile
+          file: 25/dragonwell/Dockerfile
           push: true
           tags: |
-            buzzxu/java:21-dragonwell
-            ghcr.io/buzzxu/java:21-dragonwell
+            buzzxu/java:25-dragonwell
+            ghcr.io/buzzxu/java:25-dragonwell

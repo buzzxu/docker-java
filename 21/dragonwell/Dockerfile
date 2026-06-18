@@ -1,4 +1,4 @@
-FROM buzzxu/docker:debian AS jlink   
+FROM buzzxu/docker:debian AS jlink
 
 ARG JAVA_VERSION=21.0.1
 ARG MINOR_VERSION=.0.1+12
@@ -17,7 +17,7 @@ RUN set -eux; \
     echo "export PATH JAVA_HOME" >> /etc/profile && \
     /bin/bash -c "source /etc/profile" && \
     jdir=$(dirname $(dirname $(find / -name javac))) && \
-    $JAVA_HOME/bin/jlink --compress=2  --no-man-pages --no-header-files --strip-debug --module-path ${jdir}/jmods  --add-modules java.base,java.desktop,java.instrument,java.logging,java.management,java.net.http,java.naming,java.rmi,java.security.jgss,java.sql,java.sql.rowset,java.xml,jdk.unsupported,java.scripting,jdk.dynalink,jdk.jdwp.agent,jdk.jsobject,jdk.net,jdk.nio.mapmode,jdk.sctp,jdk.xml.dom,jdk.zipfs,jdk.localedata,jdk.charsets,jdk.crypto.ec --bind-services --output /jre  
+    $JAVA_HOME/bin/jlink --compress=2  --no-man-pages --no-header-files --strip-debug --module-path ${jdir}/jmods  --add-modules java.base,java.desktop,java.instrument,java.logging,java.management,java.net.http,java.naming,java.rmi,java.security.jgss,java.sql,java.sql.rowset,java.xml,jdk.unsupported,java.scripting,jdk.dynalink,jdk.jdwp.agent,jdk.jsobject,jdk.net,jdk.nio.mapmode,jdk.sctp,jdk.xml.dom,jdk.zipfs,jdk.localedata,jdk.charsets,jdk.crypto.ec --bind-services --output /jre
 
 FROM buzzxu/docker:debian
 
@@ -25,14 +25,14 @@ LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
 COPY fonts/ /usr/share/fonts/
 
-RUN rm -rf /var/lib/apt/lists/* && \  
+RUN rm -rf /var/lib/apt/lists/* && \
     apt-get clean && \
-    apt-get update -qq && \ 
+    apt-get update -qq && \
     apt-get upgrade -y && \
     apt-get install -qq -y --no-install-recommends tzdata openssl fontconfig libfontconfig1 ca-certificates p11-kit && \
     update-ca-certificates && \
     rm /etc/localtime && \
-    ln -sv /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \ 
+    ln -sv /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" > /etc/timezone && \
     mkdir -p /opt/jre && \
     chmod a+x /opt/jre && \
@@ -40,10 +40,10 @@ RUN rm -rf /var/lib/apt/lists/* && \
     apt-get autoclean && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
-    rm -rf /tmp/* 
+    rm -rf /tmp/*
 
-COPY --from=jlink /jre /opt/jre/ 
-    
+COPY --from=jlink /jre /opt/jre/
+
 
 ENV TZ=Asia/Shanghai
 ENV LANG='C.UTF-8' LC_ALL='C.UTF-8'
