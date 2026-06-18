@@ -7,7 +7,8 @@ ENV JAVA_HOME=/usr/local/jdk-${JAVA_VERSION}
 RUN set -eux; \
     cd /tmp && \
     apt-get update; \
-    apt-get install -y --no-install-recommends wget binutils && \
+    apt-get install -y --no-install-recommends ca-certificates wget binutils && \
+    update-ca-certificates && \
     wget -c "https://download.oracle.com/java/${JAVA_VERSION}/latest/${JAVA_TAR_FILE}" && \
     mkdir -p "$JAVA_HOME" && \
     tar --extract --file ${JAVA_TAR_FILE} --directory "$JAVA_HOME" --strip-components 1 && \

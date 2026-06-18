@@ -8,7 +8,8 @@ ENV JAVA_HOME=/usr/local/jdk-${JAVA_VERSION}
 RUN set -eux; \
     cd /tmp && \
     apt-get update; \
-    apt-get install -y --no-install-recommends wget binutils && \
+    apt-get install -y --no-install-recommends ca-certificates wget binutils && \
+    update-ca-certificates && \
     wget -c "https://github.com/dragonwell-project/dragonwell25/releases/download/dragonwell-standard-${JAVA_VERSION}${MINOR_VERSION}_jdk-${JAVA_VERSION}-ga/${JAVA_TAR_FILE}" && \
     mkdir -p "$JAVA_HOME" && \
     tar --extract --file ${JAVA_TAR_FILE} --directory "$JAVA_HOME" --strip-components 1 && \
