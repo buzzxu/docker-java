@@ -25,7 +25,6 @@ java.base,java.desktop,java.instrument,java.logging,java.management,java.net.htt
 Variants:
 
 - `25`
-- `25-openjdk`
 - `25-zulu`
 - `25-bellsoft`
 - `25-alpine`

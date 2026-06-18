@@ -56,16 +56,6 @@ jobs:
             buzzxu/java:25
             ghcr.io/buzzxu/java:25
       -
-        name: Build and push(Corretto)
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: 25/corretto/Dockerfile
-          push: true
-          tags: |
-            buzzxu/java:25-openjdk
-            ghcr.io/buzzxu/java:25-openjdk
-      -
         name: Build and push(Zulu)
         uses: docker/build-push-action@v5
         with:
