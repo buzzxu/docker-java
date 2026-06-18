@@ -3,16 +3,14 @@ FROM eclipse-temurin:21-jdk-alpine AS jlink
 
 RUN apk update && apk upgrade && \
     apk add --no-cache binutils tar && \
+    modules=java.base,java.desktop,java.instrument,java.logging,java.management,java.net.http,java.naming,java.rmi,java.security.jgss,java.sql,java.sql.rowset,java.xml,jdk.unsupported,java.scripting,jdk.dynalink,jdk.jdwp.agent,jdk.jsobject,jdk.net,jdk.nio.mapmode,jdk.sctp,jdk.xml.dom,jdk.zipfs,jdk.localedata,jdk.charsets,jdk.crypto.ec && \
     $JAVA_HOME/bin/jlink \
         --compress=2  \
         --no-man-pages \
         --no-header-files \
         --strip-debug \
         --module-path $JAVA_HOME/jmods \
-        --add-modules \
-              java.base,java.desktop,java.instrument,java.logging,java.management,java.net.http,java.naming,java.rmi,java.security.jgss,java.sql,java.sql.rowset,java.xml, \
-              jdk.unsupported,java.scripting,jdk.dynalink,jdk.jdwp.agent,jdk.jsobject,jdk.net,jdk.nio.mapmode,jdk.sctp,jdk.xml.dom,jdk.zipfs, \
-              jdk.localedata,jdk.charsets,jdk.crypto.ec \
+        --add-modules "$modules" \
         --bind-services \
         --output /jre
 
@@ -39,4 +37,3 @@ ENV LANG='C.UTF-8' LC_ALL='C.UTF-8'
 ENV JAVA_VERSION 21
 ENV JAVA_HOME=/opt/jre \
     PATH="/opt/jre/bin:$PATH"
-
