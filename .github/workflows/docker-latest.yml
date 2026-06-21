@@ -41,6 +41,12 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Log in to CNB
+        uses: docker/login-action@v3
+        with:
+          registry: docker.cnb.cool
+          username: ${{ secrets.CNB_USERNAME }}
+          password: ${{ secrets.CNB_TOKEN }}
       -
         name: Build and push
         uses: docker/build-push-action@v5
@@ -51,3 +57,4 @@ jobs:
           tags: |
             buzzxu/java:latest
             ghcr.io/buzzxu/java:latest
+            docker.cnb.cool/fucksky/yuanmai/docker-image-pusher/java:latest
